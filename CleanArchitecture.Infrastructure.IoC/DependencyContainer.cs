@@ -1,4 +1,6 @@
-﻿using CleanArchitecture.Application.Interfaces;
+﻿using AutoMapper;
+using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Mappings;
 using CleanArchitecture.Application.Services;
 using CleanArchitecture.Domain.Interfaces;
 using CleanArchitecture.Infrastructure.Data.Repositories;
@@ -15,6 +17,15 @@ namespace CleanArchitecture.Infrastructure.IoC
         {
             // Application Layer
             services.AddScoped<ICleanArchitectureService, CleanArchitectureService>();
+
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new CleanArchitectureMappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             // Infrastructure.Data Layer
             services.AddScoped<IBaseRepository, BaseRepository>();

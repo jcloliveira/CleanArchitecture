@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Application.Interfaces;
+﻿using AutoMapper;
+using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.ViewModels;
 using CleanArchitecture.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -12,11 +13,14 @@ namespace CleanArchitecture.Application.Services
     {
         private readonly ICleanArchitectureRepository _cleanArchitectureRepository;
         private readonly ILogger<CleanArchitectureService> _logger;
+        private readonly IMapper _mapper;
 
         public CleanArchitectureService(ICleanArchitectureRepository cleanArchitectureRepository, 
-            ILogger<CleanArchitectureService> logger)
+            ILogger<CleanArchitectureService> logger,
+            IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
             _cleanArchitectureRepository = cleanArchitectureRepository;
         }
 
